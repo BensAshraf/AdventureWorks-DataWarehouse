@@ -80,3 +80,13 @@ CREATE TABLE Gold.FactSales (
 );
 
 GO
+
+-- OPTIMIZATION INDEXES
+CREATE INDEX IX_FactSales_OrderDate
+ON Gold.FactSales(OrderDate);
+
+CREATE INDEX IX_FactSales_ProductID
+ON Gold.FactSales(ProductID);
+
+CREATE INDEX IX_FactSales_CustomerID
+ON Gold.FactSales(CustomerID);

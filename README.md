@@ -1,21 +1,22 @@
-# AdventureWorks Data Warehouse
+AdventureWorks Data Warehouse Project
 
-## Technologies
-- SQL Server 2022 Docker
+This project implements a complete Medallion Architecture Data Warehouse using SQL Server, AdventureWorks2022 and Power BI.
+
+Technologies :
+- SQL Server
+- SSMS
 - Power BI
-- SQL Server Management Studio
-- Docker Desktop
+- AdventureWorks2022
+- GitHub
 
-## Architecture
-- Bronze Layer
-- Silver Layer
-- Gold Layer
+Architecture : Bronze → Silver → Gold
 
-## Features
-- ETL Pipeline
-- Data Cleaning
-- Data Aggregation
-- KPI Dashboard
+KPIs :
+- Total Revenue
+- Total Orders
+- Revenue by Category
+- Top Customers
+- Top Products
+- Sales Evolution
 
-## Dashboard
-Power BI dashboard connected to SQL Server Docker.
+![alt text](screenshots/FinalDashboard.png) 
