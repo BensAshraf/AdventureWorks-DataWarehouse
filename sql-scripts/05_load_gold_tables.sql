@@ -123,3 +123,50 @@ GO
 
 SELECT TOP 20 *
 FROM Gold.DimCustomer;
+
+-- =========================================
+-- SCD TYPE 2 - CUSTOMER DIMENSION
+-- =========================================
+
+-- Ajouter colonnes SCD2
+
+ALTER TABLE Gold.DimCustomer
+ADD
+    StartDate DATE,
+    EndDate DATE,
+    IsCurrent BIT;
+
+-- Initialisation
+
+UPDATE Gold.DimCustomer
+SET
+    StartDate = GETDATE(),
+    EndDate = NULL,
+    IsCurrent = 1;
+
+-- Désactiver ancienne version
+
+UPDATE Gold.DimCustomer
+SET
+    EndDate = GETDATE(),
+    IsCurrent = 0
+WHERE CustomerKey = 1;
+
+-- Ajouter nouvelle version
+
+INSERT INTO Gold.DimCustomer
+(
+    CustomerID,
+    CustomerName,
+    StartDate,
+    EndDate,
+    IsCurrent
+)
+VALUES
+(
+    11000,
+    'Aaron Allen Updated',
+    GETDATE(),
+    NULL,
+    1
+);
