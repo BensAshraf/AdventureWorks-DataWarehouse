@@ -90,3 +90,16 @@ ON Gold.FactSales(ProductID);
 
 CREATE INDEX IX_FactSales_CustomerID
 ON Gold.FactSales(CustomerID);
+
+-- SCD TYPE 2
+ALTER TABLE Gold.DimCustomer
+ADD
+    StartDate DATE,
+    EndDate DATE,
+    IsCurrent BIT;
+
+UPDATE Gold.DimCustomer
+SET
+    StartDate = GETDATE(),
+    EndDate = NULL,
+    IsCurrent = 1;
