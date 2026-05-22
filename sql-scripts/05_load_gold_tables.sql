@@ -66,3 +66,60 @@ SELECT COUNT(*) FROM Gold.DimCustomer;
 SELECT COUNT(*) FROM Gold.DimDate;
 
 SELECT COUNT(*) FROM Gold.FactSales;
+
+
+------
+--FIX ISSUE
+---------
+
+USE AdventureWorksDW;
+GO
+
+DROP TABLE Gold.DimCustomer;
+GO
+USE AdventureWorksDW;
+GO
+
+CREATE TABLE Gold.DimCustomer (
+
+    CustomerKey INT PRIMARY KEY IDENTITY(1,1),
+
+    CustomerID INT,
+
+    CustomerName VARCHAR(200)
+
+);
+
+GO
+USE AdventureWorksDW;
+GO
+
+INSERT INTO Gold.DimCustomer (
+
+    CustomerID,
+    CustomerName
+
+)
+
+SELECT
+
+    c.CustomerID,
+
+    CASE
+
+        WHEN p.FirstName IS NOT NULL
+        THEN p.FirstName + ' ' + p.LastName
+
+        ELSE 'Store Customer'
+
+    END AS CustomerName
+
+FROM AdventureWorks2022.Sales.Customer c
+
+LEFT JOIN AdventureWorks2022.Person.Person p
+ON c.PersonID = p.BusinessEntityID;
+
+GO
+
+SELECT TOP 20 *
+FROM Gold.DimCustomer;
