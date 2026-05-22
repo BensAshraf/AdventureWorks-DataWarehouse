@@ -1,0 +1,14 @@
+CREATE DATABASE AdventureWorksDW;
+GO
+
+USE AdventureWorksDW;
+GO
+
+CREATE SCHEMA Bronze;
+GO
+
+CREATE SCHEMA Silver;
+GO
+
+CREATE SCHEMA Gold;
+GO
