@@ -170,3 +170,48 @@ VALUES
     NULL,
     1
 );
+
+-- =========================================
+-- OPTIMISATION DATA WAREHOUSE
+-- =========================================
+
+-- INDEXES
+
+CREATE INDEX IDX_FactSales_CustomerID
+ON Gold.FactSales(CustomerID);
+
+CREATE INDEX IDX_FactSales_ProductID
+ON Gold.FactSales(ProductID);
+
+CREATE INDEX IDX_FactSales_OrderDate
+ON Gold.FactSales(OrderDate);
+
+GO
+
+-- VIEW POUR ANALYSE
+
+CREATE VIEW Gold.vSalesSummary AS
+SELECT
+    ProductID,
+    CustomerID,
+    SUM(TotalRevenue) AS TotalRevenue,
+    SUM(OrderQty) AS TotalQuantity
+FROM Gold.FactSales
+GROUP BY ProductID, CustomerID;
+
+GO
+
+-- STORED PROCEDURE
+
+CREATE PROCEDURE Gold.GetTopCustomers
+AS
+BEGIN
+    SELECT TOP 10
+        CustomerID,
+        SUM(TotalRevenue) AS Revenue
+    FROM Gold.FactSales
+    GROUP BY CustomerID
+    ORDER BY Revenue DESC;
+END;
+
+GO
